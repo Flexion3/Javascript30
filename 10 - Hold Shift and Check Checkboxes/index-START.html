@@ -17,7 +17,7 @@
       margin:50px auto;
       background:white;
       border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow:20px 20px 0 rgba(0,0,0,0.1);
     }
 
     .item {
@@ -99,6 +99,41 @@
   </div>
 
 <script>
+  var boxes = [];
+
+  boxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastChecked;
+
+
+  function handleCheck(e){
+    let inBetween = false;
+      if(e.shiftKey && this.checked){
+        boxes.forEach(box => {
+            console.log(box);
+            if(box === this || box === lastChecked){
+                inBetween = !inBetween;
+                console.log("start");
+            }
+
+            if (inBetween) {
+                console.log("in between", box)
+                box.checked = true;
+            }
+        })
+    }
+
+    if(this.checked){
+          lastChecked = this;
+    }
+
+  }
+
+  console.log(boxes);
+
+  boxes.forEach((box) => {
+      box.addEventListener('click', handleCheck)
+  })
 </script>
+
 </body>
 </html>
